@@ -1,0 +1,27 @@
+{
+  "name": "logchampions",
+  "version": "1.0.0",
+  "description": "Warcraft Logs Champions",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prolls/WowLogChampions.git"
+  },
+  "keywords": [
+    "Wow",
+    "warcraft",
+    "logs"
+  ],
+  "author": "Babtou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Prolls/WowLogChampions/issues"
+  },
+  "homepage": "https://github.com/Prolls/WowLogChampions#readme",
+  "dependencies": {
+    "discord.js": "^14.14.1"
+  }
+}
