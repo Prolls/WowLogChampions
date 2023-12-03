@@ -109,7 +109,7 @@ module.exports = class Ping extends Command {
             .setColor(0x0099FF)
             // .setTitle('Warcraft rankings')
             .setAuthor({ name: 'Warcraft Logs', iconURL: 'https://assets.rpglogs.com/img/warcraft/favicon.png?v=2', url: 'https://www.warcraftlogs.com/reports/'+report })
-            .setDescription('Palmares des sentis')
+            .setDescription(':unicorn: Palmares des sentis :unicorn: ')
             // .setThumbnail('https://i.imgur.com/AfFp7pu.png')
             .setTimestamp()
             .addFields(

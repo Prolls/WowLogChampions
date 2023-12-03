@@ -2,6 +2,7 @@ FROM node:lts-alpine
 ENV CLIENT_ID=
 ENV CLIENT_SECRET=
 ENV TOKEN_DISCORD=
+ENV GUILD_ID=
 WORKDIR /usr/src/app
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 RUN npm install --production --silent && mv node_modules ../

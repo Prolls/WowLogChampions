@@ -63,7 +63,7 @@ module.exports = class Logs {
         const data = JSON.stringify({
             query: `{ 
                 reportData	{
-                    reports(guildID: 73955, limit: 1) {
+                    reports(guildID: ` + process.env['GUILD_ID'] + `, limit: 1) {
                         data {
                             code
                             title
@@ -315,7 +315,7 @@ module.exports = class Logs {
             metricResult.name = name;
             if (eventCount[name].totalParse == 0) { metricResult.count = 0 }
             else { metricResult.count = Math.round(eventCount[name].totalAmount / eventCount[name].totalParse); }
-            metricList.push(metricResult)
+            if (!isNaN(metricResult.count)){metricList.push(metricResult) }
         }
         metricList.sort((a, b) => b.count - a.count)
         return metricList;
@@ -363,9 +363,10 @@ module.exports = class Logs {
             metricResult.name = name;
             if (eventCount[name].totalParse == 0) { metricResult.count = 0 }
             else { metricResult.count = Math.round(eventCount[name].totalAmount / eventCount[name].totalParse * 1000); }
-            metricList.push(metricResult)
+            if (!isNaN(metricResult.count)){metricList.push(metricResult) }
         }
         metricList.sort((a, b) => b.count - a.count)
+        console.log(metricList)
 
 
         var lastLine = metricList.length - 1;
