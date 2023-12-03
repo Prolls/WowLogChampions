@@ -16,5 +16,6 @@ services:<br />
       - CLIENT_ID=*Warcraft log client id*<br />
       - CLIENT_SECRET=*Warcraft log secret id*<br />
       - TOKEN_DISCORD=*discord bot token*<br />
+      - GUILD_ID=*Your Guild ID in Warcraft Log*<br />
     restart: always<br />
 
