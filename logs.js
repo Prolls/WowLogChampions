@@ -76,6 +76,32 @@ module.exports = class Logs {
         return JSON.parse(res).data.reportData.reports.data[0].code
 
     }
+
+    async getReportdetail(reportId) {
+        const data = JSON.stringify({
+            query: `{ 
+                reportData	{
+                    report(code: "`+ reportId + `") {
+                        code
+                        endTime
+                        title
+                        startTime
+                    }
+                }
+            }`,
+        });
+        var res = await this.GetLogs(data)
+        var report = JSON.parse(res).data.reportData.report;
+        return {
+            code: report.code,
+            endTime: report.endTime,
+            title: report.title,
+            startTime: report.startTime,
+            formattedStartDate: new Date(report.startTime * 1000),
+        }
+
+    }
+
     async getReportId(content) {
         var reportId = '';
         if (content.slice(6) == '') {
@@ -315,7 +341,7 @@ module.exports = class Logs {
             metricResult.name = name;
             if (eventCount[name].totalParse == 0) { metricResult.count = 0 }
             else { metricResult.count = Math.round(eventCount[name].totalAmount / eventCount[name].totalParse); }
-            if (!isNaN(metricResult.count)){metricList.push(metricResult) }
+            if (!isNaN(metricResult.count)) { metricList.push(metricResult) }
         }
         metricList.sort((a, b) => b.count - a.count)
         return metricList;
@@ -363,17 +389,17 @@ module.exports = class Logs {
             metricResult.name = name;
             if (eventCount[name].totalParse == 0) { metricResult.count = 0 }
             else { metricResult.count = Math.round(eventCount[name].totalAmount / eventCount[name].totalParse * 1000); }
-            if (!isNaN(metricResult.count)){metricList.push(metricResult) }
+            if (!isNaN(metricResult.count)) { metricList.push(metricResult) }
         }
         metricList.sort((a, b) => b.count - a.count)
-        console.log(metricList)
 
-
-        var lastLine = metricList.length - 1;
-        palmares.minDegatsSubis.nom = metricList[lastLine].name;
-        palmares.minDegatsSubis.nombre = metricList[lastLine].count;
-        palmares.maxDegatsSubis.nom = metricList[0].name;
-        palmares.maxDegatsSubis.nombre = metricList[0].count;
+        if (metricList.length >= 1) {
+            var lastLine = metricList.length - 1;
+            palmares.minDegatsSubis.nom = metricList[lastLine].name;
+            palmares.minDegatsSubis.nombre = metricList[lastLine].count;
+            palmares.maxDegatsSubis.nom = metricList[0].name;
+            palmares.maxDegatsSubis.nombre = metricList[0].count;
+        }
     }
 
 }

@@ -13,10 +13,13 @@ module.exports = class Ping extends Command {
         var log = new Logs();
 
         var report = await log.getReportId(message.content);
+        var reportDetail = await log.getReportdetail(report);
         console.log(report)
+        console.log(reportDetail)
         // test report: 'V9MJr1kYFqTAn7Ng';
-        var startTime = '1';
-        var endTime = '999999999999';
+        var startTime = 0;
+        var endTime = 9999999999999;
+
         var palmares = {
             maxMort:
             {
@@ -107,11 +110,11 @@ module.exports = class Ping extends Command {
 
         const palmaresMessage = new Discord.EmbedBuilder()
             .setColor(0x0099FF)
-            // .setTitle('Warcraft rankings')
+            .setTitle(reportDetail.title)
             .setAuthor({ name: 'Warcraft Logs', iconURL: 'https://assets.rpglogs.com/img/warcraft/favicon.png?v=2', url: 'https://www.warcraftlogs.com/reports/'+report })
             .setDescription(':unicorn: Palmares des sentis :unicorn: ')
             // .setThumbnail('https://i.imgur.com/AfFp7pu.png')
-            .setTimestamp()
+            .setTimestamp(reportDetail.startTime)
             .addFields(
                 { name: palmares.firstdps.surnom, value: palmares.firstdps.nom +' avec '+ palmares.firstdps.nombre + ' ' + palmares.firstdps.type, inline: true  },
                 { name: palmares.seconddps.surnom, value: palmares.seconddps.nom +' avec '+ palmares.seconddps.nombre + ' ' + palmares.seconddps.type , inline: true },
