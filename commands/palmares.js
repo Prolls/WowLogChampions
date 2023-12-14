@@ -1,13 +1,11 @@
 const Command = require('./command')
-const Logs = require('../logs')
+const Logs = require('../logs/logs')
 const Discord = require('discord.js')
 
 module.exports = class Ping extends Command {
     match(message) {
-
         return message.content.startsWith('!logs')
     }
-
 
     async action(message) {
         var log = new Logs();

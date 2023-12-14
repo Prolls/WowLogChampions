@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  logchampions:
+    image: prolls/logchampions
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      ENV CLIENT_ID:
+      ENV CLIENT_SECRET:
+      ENV TOKEN_DISCORD:
+    ports:
+      - 3000:3000
