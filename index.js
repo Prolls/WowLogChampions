@@ -2,6 +2,7 @@ const Discord = require('discord.js')
 const Palmares = require('./commands/palmares')
 const WebHookReaction = require('./commands/webhookreaction');
 const SmallTalk = require('./commands/smallTalk');
+const Journee = require('./commands/journee');
 require('dotenv').config();
 
 
@@ -28,6 +29,7 @@ bot.on('messageCreate', function (message) {
   new WebHookReaction().parse(message);
   new Palmares().parse(message);
   new SmallTalk().parse(message);
+  new Journee().parse(message);
 })
 
 bot.login(process.env['TOKEN_DISCORD'])

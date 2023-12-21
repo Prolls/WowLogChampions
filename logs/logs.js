@@ -80,7 +80,7 @@ module.exports = class Logs {
     async getDpsCount(report, palmares) {
 
         const res = await this.logQuery.queryMetricCount(report, 'dps');
-        this.logFormatter.buildDpsPalmares(res, palmares);
+        this.logFormatter.buildDpsPalmares(res, palmares,);
 
         return new Promise((resolve, reject) => {
             try {
@@ -95,7 +95,7 @@ module.exports = class Logs {
     async getHpsCount(report, palmares) {
 
         const res = await this.logQuery.queryMetricCount(report, 'hps');
-        this.logFormatter.buildHpsPalmares(res, palmares);
+        this.logFormatter.buildHpsPalmares(res, palmares,);
 
         return new Promise((resolve, reject) => {
             try {

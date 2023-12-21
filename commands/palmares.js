@@ -12,8 +12,8 @@ module.exports = class Ping extends Command {
 
         var report = await log.getReportId(message.content);
         var reportDetail = await log.getReportdetail(report);
-        console.log(report)
-        console.log(reportDetail)
+        // console.log(report)
+        // console.log(reportDetail)
         // test report: 'V9MJr1kYFqTAn7Ng';
         var startTime = 0;
         var endTime = 9999999999999;
