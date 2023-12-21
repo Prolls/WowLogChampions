@@ -1,7 +1,7 @@
-#Features
-!logs displays your guild's mates achievements during last raid
-!logs *Any Log ID* displays achievements of this raid attendants
-!transmo displays next world days for my guild raid days. It defines how the raid should be deguised in
+# Features
+!logs displays your guild's mates achievements during last raid<br />
+!logs *Any Log ID* displays achievements of this raid attendants<br />
+!transmo displays next world days for my guild raid days. It defines how the raid should be deguised in<br />
 
 # To make it run on a node js server:<br />
 Add a .env file in the root folder with the following content:
