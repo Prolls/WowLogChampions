@@ -13,23 +13,27 @@ module.exports = class Journee extends Command {
                 .setColor(0x0099FF)
                 .setTitle("Prochaines transmos de raid")
                 .setAuthor({ name: 'journee-mondiale.com', url: 'https://www.journee-mondiale.com/les-journees-mondiales.htm' })
-            for (const raidDate of raidList){
+            console.log(raidList)
+            for (const raidDate of raidList) {
                 let stringJour = ''
-                for (const jour of json[raidDate.formatedDate]){
-                    if (stringJour===''){stringJour = jour['Journée'];}
-                    else {stringJour = stringJour +'\n'+ jour['Journée'];}
+                let transmoFormattedDate = raidDate.formatedDate;
+                let transmoDate = new Date(raidDate.date)
+                if (!json[transmoFormattedDate]) {
+                    transmoDate.setDate(transmoDate.getDate() - 1);
+                    transmoFormattedDate = this.formatDate(transmoDate);
+                    if (!json[transmoFormattedDate]) {
+                        transmoDate = new Date(raidDate.date)
+                        transmoDate.setDate(transmoDate.getDate() + 1);
+                        transmoFormattedDate = this.formatDate(transmoDate)
+                    }
                 }
-                journeesMessage.addFields({ name: raidDate.date, value: stringJour, inline: false  })
-                // journeesMessage.addFields({ name: ' ', value: ' ' })
+                for (const jour of json[transmoFormattedDate]) {
+                    if (stringJour === '') { stringJour = jour['Journée']; }
+                    else { stringJour = stringJour + '\n' + jour['Journée']; }
+                }
+                journeesMessage.addFields({ name: raidDate.date, value: stringJour, inline: false })
             }
-            
-                
-            //     .setDescription(':unicorn: Palmares des sentis :unicorn: ')
-            //     // .setThumbnail('https://i.imgur.com/AfFp7pu.png')
-                // .setTimestamp(reportDetail.startTime)
-            //     .addFields(
-            //         { name: palmares.firstdps.surnom, value: palmares.firstdps.nom +' avec '+ palmares.firstdps.nombre + ' ' + palmares.firstdps.type, inline: true  },
-            //     )
+
             message.channel.send({ embeds: [journeesMessage] });
         }
     }
@@ -41,12 +45,12 @@ module.exports = class Journee extends Command {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
-          };
+        };
         while (dateList.length <= numberRaids) {
             if (testedDate.getDay() == 1 || testedDate.getDay() == 3) { // If Monday or Wednesday
-                dateList.push({date: testedDate.toLocaleDateString('fr-FR',options), formatedDate: this.formatDate(testedDate)});
+                dateList.push({ date: testedDate.toLocaleDateString('fr-FR', options), formatedDate: this.formatDate(testedDate) });
             }
-            testedDate.setDate( testedDate.getDate() + 1 );
+            testedDate.setDate(testedDate.getDate() + 1);
         }
         return dateList;
     }
@@ -58,7 +62,7 @@ module.exports = class Journee extends Command {
     formatDate(date) {
         return [
             this.padTo2Digits(date.getDate()),
-            this.padTo2Digits(date.getMonth()+1),
+            this.padTo2Digits(date.getMonth() + 1),
         ].join('-');
     }
 
