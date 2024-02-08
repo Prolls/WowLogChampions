@@ -75,6 +75,7 @@ module.exports = class LogsFormatter {
 
     buildPerformancePalmares(res, palmares, includeTanks) {
         var eventCount = [];
+        console.log(res)
         JSON.parse(res).data.reportData.report.rankings.data.forEach(
             (fight) => {
 
@@ -111,6 +112,7 @@ module.exports = class LogsFormatter {
                 )
             }
         )
+
         // Fabrication de la liste finale triée décroissant
         var metricList = [];
         for (var name in eventCount) {
@@ -149,7 +151,7 @@ module.exports = class LogsFormatter {
         JSON.parse(res).data.reportData.report.table.data.entries.forEach(
             (character) => {
                 if (character.type !== 'NPC' && character.type !== 'Unknown' && character.icon !== 'Warrior-Protection' && character.icon !== 'DeathKnight-Blood' 
-                        && character.icon !== 'Druid-Gardian' && character.icon !== 'Monk-Brewmaster' && character.icon !== 'DemonHunter-Vengeance') {
+                        && character.icon !== 'Druid-Gardian' && character.icon !== 'Monk-Brewmaster' && character.icon !== 'DemonHunter-Vengeance' ) {
                     var Name = String(character.name);
                     if (!eventCount[Name]) {
                         eventCount[Name] = { totalAmount: character.totalReduced, totalParse: character.activeTimeReduced };
@@ -159,6 +161,7 @@ module.exports = class LogsFormatter {
                 }
             }
         )
+        console.log(JSON.parse(res).data.reportData.report.table.data.entries)
 
         // Fabrication de la liste finale triée décroissant
         var metricList = [];
@@ -166,8 +169,9 @@ module.exports = class LogsFormatter {
             var metricResult = {};
             metricResult.name = name;
             if (eventCount[name].totalParse == 0) { metricResult.count = 0 }
-            else { metricResult.count = Math.round(eventCount[name].totalAmount / eventCount[name].totalParse * 1000); }
-            if (!isNaN(metricResult.count)) { metricList.push(metricResult) }
+            else { metricResult.count = Math.round(eventCount[name].totalAmount / eventCount[name].totalParse * 1000);
+                if (!isNaN(metricResult.count)) { metricList.push(metricResult) } }
+            
         }
         metricList.sort((a, b) => b.count - a.count)
 
